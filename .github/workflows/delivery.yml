@@ -1,4 +1,4 @@
-name: cont. delivery
+name: "cont. delivery"
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
   Start:
     runs-on: ubuntu-latest
     steps:
-      - steps: actions/checkout@v4
+      - uses: actions/checkout@v4
       - name: Compile
         run: echo "Hello, World!"
 
@@ -25,7 +25,7 @@ jobs:
       url: ${{ secrets.ENV_DEVELOPMENT }}
     steps:
       - name: Get latest code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4        
       - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
