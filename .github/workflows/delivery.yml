@@ -1,0 +1,75 @@
+name: cont. delivery
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  Start:
+    runs-on: ubuntu-latest
+    steps:
+      - steps: actions/checkout@v4
+      - name: Compile
+        run: echo "Hello, World!"
+
+  Deploy_on_Development:
+    name: Deploy to Development Env.
+    if: github.event_name == 'pull_request'
+    needs: [Start]
+    runs-on: ubuntu-latest
+    environment:
+      name: Development
+      url: ${{ secrets.ENV_DEVELOPMENT }}
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER_DEVELOPMENT }}
+          username: ${{ secrets.FTP_USERNAME_DEVELOPMENT }}
+          password: ${{ secrets.FTP_PASSWORD_DEVELOPMENT }}
+          port: ${{ secrets.FTP_PORT_DEVELOPMENT }}
+          server-dir: ${{ secrets.DESTINATION_PATH_DEVELOPMENT }}
+
+  Deploy_on_Staging:
+    name: Deploy to Staging Env.
+    if: github.event.ref == 'refs/heads/master'
+    needs: [Start]
+    runs-on: ubuntu-latest
+    environment:
+      name: Staging
+      url: ${{ secrets.ENV_STAGING }}
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER_STAGING }}
+          username: ${{ secrets.FTP_USERNAME_STAGING }}
+          password: ${{ secrets.FTP_PASSWORD_STAGING }}
+          port: ${{ secrets.FTP_PORT_STAGING }}
+          server_dir: ${{ secrets.DESTINATION_PATH_STAGING }}
+
+  Deploy_on_Production:
+    name: Deploy on Production Env.
+    needs: [Deploy_on_Staging]
+    runs_on: ubuntu_latest
+    environment:
+      name: Production
+      url: ${{ secrets.ENV_PRODUCTION }}
+    steps:
+      - name: Get latest code
+        uses: actions/checkout@v4
+      - name: Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER_PRODUCTION }}
+          username: ${{ secrets.FTP_USERNAME_PRODUCTION }}
+          password: ${{ secrets.FTP_PASSWORD_PRODUCTION }}
+          port: ${{ secrets.FTP_PORT_PRODUCTION }}
+          server_dir: ${{ secrets.DESTINATION_PATH_PRODUCTION }}
