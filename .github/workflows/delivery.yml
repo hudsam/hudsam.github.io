@@ -60,7 +60,7 @@ jobs:
     needs: [Deploy_on_Staging]
     runs-on: ubuntu_latest
     environment:
-      name: droduction
+      name: production
       url: ${{ vars.PRODUCTION }}
     steps:
       - name: Get latest code
