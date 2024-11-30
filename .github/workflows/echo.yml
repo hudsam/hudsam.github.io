@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: "-"
+      - name: "Printing vars"
         run: |
-          echo ${{ env.DEVELOPMENT }}
-          echo ${{ env.STAGING }}
-          echo ${{ env.PRODUCTION }}
+          echo ${{ vars.DEVELOPMENT }}
+          echo ${{ vars.STAGING }}
+          echo ${{ vars.PRODUCTION }}
