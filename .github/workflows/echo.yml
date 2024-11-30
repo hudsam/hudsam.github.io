@@ -1,8 +1,8 @@
-name: "print env. & var"
+name: "printing"
 
 on:
   push:
-    branches: [dev-stages]
+    branches: [dev-stage]
   workflow_dispatch:
 
 jobs:
