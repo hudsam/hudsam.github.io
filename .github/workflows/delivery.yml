@@ -58,7 +58,7 @@ jobs:
   Deploy_on_Production:
     name: Deploy on Production Env.
     needs: [Deploy_on_Staging]
-    runs-on: ubuntu_latest
+    runs-on: ubuntu-latest
     environment:
       name: production
       url: ${{ vars.PRODUCTION }}
