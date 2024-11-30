@@ -7,6 +7,6 @@ jobs:
       - uses: actions/checkout@v4
       - name: "-"
         run: |
-        echo ${{ env.DEVELOPMENT }}
-        echo ${{ env.STAGING }}
-        echo ${{ env.PRODUCTION }}
+          echo ${{ env.DEVELOPMENT }}
+          echo ${{ env.STAGING }}
+          echo ${{ env.PRODUCTION }}
