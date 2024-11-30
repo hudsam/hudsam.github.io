@@ -21,7 +21,7 @@ jobs:
     needs: [Start]
     runs-on: ubuntu-latest
     environment:
-      name: Development
+      name: development
       url: ${{ env.DEVELOPMENT }}
     steps:
       - name: Get latest code
@@ -41,7 +41,7 @@ jobs:
     needs: [Start]
     runs-on: ubuntu-latest
     environment:
-      name: Staging
+      name: staging
       url: ${{ env.STAGING }}
     steps:
       - name: Get latest code
@@ -60,7 +60,7 @@ jobs:
     needs: [Deploy_on_Staging]
     runs-on: ubuntu_latest
     environment:
-      name: Production
+      name: droduction
       url: ${{ env.PRODUCTION }}
     steps:
       - name: Get latest code
