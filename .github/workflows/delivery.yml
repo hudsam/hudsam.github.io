@@ -2,7 +2,7 @@ name: "cont. delivery"
 
 on:
   push:
-    branches: [master]
+    branches: [dev-stage]
   pull_request:
     branches: [master]
   workflow_dispatch:
@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: development
-      url: ${{ env.DEVELOPMENT }}
+      url: ${{ vars.DEVELOPMENT }}
     steps:
       - name: Get latest code
         uses: actions/checkout@v4        
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: staging
-      url: ${{ env.STAGING }}
+      url: ${{ vars.STAGING }}
     steps:
       - name: Get latest code
         uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
     runs-on: ubuntu_latest
     environment:
       name: droduction
-      url: ${{ env.PRODUCTION }}
+      url: ${{ vars.PRODUCTION }}
     steps:
       - name: Get latest code
         uses: actions/checkout@v4
