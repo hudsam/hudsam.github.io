@@ -5,6 +5,7 @@ on:
     branches: [dev-stage]
   pull_request:
     branches: [master]
+  workflow_dispatch:
 
 jobs:
   Start:
