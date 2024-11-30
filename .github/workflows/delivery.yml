@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Development
-      url: ${{ secrets.ENV_DEVELOPMENT }}
+      url: ${{ env.DEVELOPMENT }}
     steps:
       - name: Get latest code
         uses: actions/checkout@v4        
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Staging
-      url: ${{ secrets.ENV_STAGING }}
+      url: ${{ env.STAGING }}
     steps:
       - name: Get latest code
         uses: actions/checkout@v4
@@ -61,7 +61,7 @@ jobs:
     runs_on: ubuntu_latest
     environment:
       name: Production
-      url: ${{ secrets.ENV_PRODUCTION }}
+      url: ${{ env.PRODUCTION }}
     steps:
       - name: Get latest code
         uses: actions/checkout@v4
